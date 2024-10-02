@@ -6,6 +6,16 @@ def digito_para_palavra(match):
         '8': 'oito', '9': 'nove'}
     return digito_palavra[match.group(0)]
 
+def acento_para_letra(match):
+    map_acento = {
+        'á': 'a', 'à': 'a', 'ã': 'a', 'â': 'a',
+        'é': 'e', 'ê': 'e',
+        'í': 'i',
+        'ó': 'o', 'ô': 'o', 'õ': 'o',
+        'ú': 'u', 'ü': 'u',
+        'ç': 'c'}
+    return map_acento[match.group(0)]
+
 def load_stopwords(path='stopwords.txt'):
     with open(path, 'r', encoding='utf8') as f:
         stopwords = f.read().splitlines()
@@ -27,6 +37,9 @@ def normalizar_texto(texto: str) -> str:
 
     # Trocar dígitos por palavras
     texto_norm = re.sub(r'\d', digito_para_palavra, texto_norm)
+
+    # Trocar acentos por letras
+    texto_norm = re.sub(r'[áàãâéêíóôõúüç]', acento_para_letra, texto_norm)
 
     # Remove Stopwords
     texto_norm = re.sub(r'\bw+\b', is_stopword, texto_norm)
