@@ -1,4 +1,4 @@
-from regex import normalizar_texto
+from resposta import escolhe_resposta
 
 def main():
     perguntas_respostas = {
@@ -13,8 +13,14 @@ def main():
         'Vocês têm alguma promoção no momento?': 'Sim! Estamos com descontos especiais em nossos principais serviços. Confira nossa página de promoções para mais detalhes.',
         'Como posso deixar um feedback?': 'Agradecemos por querer nos dar um feedback! Você pode preencher nosso formulário de satisfação no site ou enviar um e-mail diretamente para feedback@empresa.com.'
     }
-    for pergunta, resposta in perguntas_respostas.items():
-        print(f'{normalizar_texto(pergunta)}\n{normalizar_texto(resposta)}\n\n')
+
+    pergunta_usuario = ''
+
+    while pergunta_usuario.lower() != 'sair':
+        pergunta_usuario = input("Você: ")
+        print(pergunta_usuario)
+        resposta = escolhe_resposta(pergunta_usuario, perguntas_respostas, debug=True)
+        print(f"Chatbot: {resposta}")
 
 if __name__ == '__main__':
     main()
