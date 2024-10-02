@@ -19,7 +19,7 @@ def main():
     while pergunta_usuario.lower() != 'sair':
         pergunta_usuario = input("Você: ")
         print(pergunta_usuario)
-        resposta = escolhe_resposta(pergunta_usuario, perguntas_respostas, debug=True)
+        resposta = escolhe_resposta(pergunta_usuario, perguntas_respostas, debug=True) # Para ver a lógica
         print(f"Chatbot: {resposta}")
 
 if __name__ == '__main__':
