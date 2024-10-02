@@ -1,4 +1,4 @@
-def jaccard_index(token1: str, token2: str) -> int:
+def jaccard_index(token1: str, token2: str) -> float:
 
     # Criação de set() cortando em espaços vazios:
     words_token1_norm = set(token1.split())
@@ -11,6 +11,6 @@ def jaccard_index(token1: str, token2: str) -> int:
     union = words_token1_norm.union(words_token2_norm)
 
     # Index
-    index = int(len(intersection)) / len(union)
+    index = float(len(intersection)) / len(union)
 
     return index

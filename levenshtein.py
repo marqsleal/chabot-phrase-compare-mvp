@@ -1,6 +1,6 @@
 import numpy as np
 
-def levenshtein_distance(token1: str, token2: str) -> int:
+def levenshtein_distance(token1: str, token2: str) -> float:
 
     token1len = len(token1) + 1
     token2len = len(token2) + 1
@@ -33,6 +33,6 @@ def levenshtein_distance(token1: str, token2: str) -> int:
                 else:
                     distances[t1][t2] = c + 1
 
-    levenshtein = int(distances[len(token1)][len(token2)])
+    levenshtein = float(distances[len(token1)][len(token2)])
 
     return levenshtein
