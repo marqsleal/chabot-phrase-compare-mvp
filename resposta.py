@@ -2,18 +2,16 @@ from jaccard import jaccard_index
 from levenshtein import levenshtein_distance
 from regex import normalizar_texto
 
-threshold_jaccard = 0.15
-threshold_levenshtein = 10.0
-
 def comparador_sim(indice_jaccard: float, distancia_levenshtein: float, melhor_similaridade: float,
-                   pergunta_usuario_norm: str, pergunta_norm: str) -> float:
+                   pergunta_usuario_norm: str, pergunta_norm: str, threshold_jaccard: float, threshold_levenshtein: float) -> float:
     if indice_jaccard > melhor_similaridade and indice_jaccard >= threshold_jaccard:
         return indice_jaccard
     elif distancia_levenshtein <= threshold_levenshtein:
         return 1 - (distancia_levenshtein / max(len(pergunta_usuario_norm), len(pergunta_norm)))
     return melhor_similaridade
 
-def escolhe_resposta(pergunta_usuario: str, perguntas_respostas: dict, debug=False) -> str:
+def escolhe_resposta(pergunta_usuario: str, perguntas_respostas: dict, threshold_jaccard=0.15, threshold_levenshtein=10.0,
+                     debug=False) -> str:
     pergunta_usuario_norm = normalizar_texto(pergunta_usuario)
 
     melhor_pergunta = None
@@ -25,14 +23,11 @@ def escolhe_resposta(pergunta_usuario: str, perguntas_respostas: dict, debug=Fal
         indice_jaccard = jaccard_index(pergunta_usuario_norm, pergunta_norm)
         distancia_levenshtein = levenshtein_distance(pergunta_usuario_norm, pergunta_norm)
 
-        comparador = comparador_sim(indice_jaccard, distancia_levenshtein, melhor_similaridade, pergunta_usuario_norm, pergunta_norm)
+        comparador = comparador_sim(indice_jaccard, distancia_levenshtein, melhor_similaridade, pergunta_usuario_norm,
+                                    pergunta_norm, threshold_jaccard, threshold_levenshtein)
 
         if debug:
-            print(
-                f"""
-                Pergunta: {pergunta}, Jaccard: {indice_jaccard}, Levenshtein: {distancia_levenshtein}, 
-                \nComparador: {comparador}, Melhor Similaridade: {melhor_similaridade}
-                """)
+            print(f"""Pergunta: '{pergunta}'\nJaccard: {indice_jaccard:.2f}\nLevenshtein: {distancia_levenshtein}\nComparador: {comparador:.2f}\nMelhor Similaridade até agora: {melhor_similaridade:.2f}\n""")
 
         if comparador > melhor_similaridade:
             melhor_similaridade = comparador
