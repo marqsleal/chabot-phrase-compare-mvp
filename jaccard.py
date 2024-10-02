@@ -10,6 +10,9 @@ def jaccard_index(token1: str, token2: str) -> float:
     # Union:
     union = words_token1_norm.union(words_token2_norm)
 
+    if len(union) == 0:  # Evita divisão por zero
+        return 0.0
+
     # Index
     index = float(len(intersection)) / len(union)
 
