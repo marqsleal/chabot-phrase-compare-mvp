@@ -1,5 +1,8 @@
 import numpy as np
 
+def normalizacao_levenshtein(levenshtein: float, token1: str, token2: str) -> float:
+    return 1 - (levenshtein / max(len(token1), len(token2)))
+
 def levenshtein_distance(token1: str, token2: str) -> float:
 
     token1len = len(token1) + 1

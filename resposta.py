@@ -1,5 +1,5 @@
 from jaccard import jaccard_index
-from levenshtein import levenshtein_distance
+from levenshtein import levenshtein_distance, normalizacao_levenshtein
 from regex import normalizar_texto
 
 def comparador_sim(indice_jaccard: float, distancia_levenshtein: float, melhor_similaridade: float,
@@ -7,7 +7,7 @@ def comparador_sim(indice_jaccard: float, distancia_levenshtein: float, melhor_s
     if indice_jaccard > melhor_similaridade and indice_jaccard >= threshold_jaccard:
         return indice_jaccard
     elif distancia_levenshtein <= threshold_levenshtein:
-        return 1 - (distancia_levenshtein / max(len(pergunta_usuario_norm), len(pergunta_norm)))
+        return normalizacao_levenshtein(distancia_levenshtein, pergunta_usuario_norm, pergunta_norm)
     return melhor_similaridade
 
 def escolhe_resposta(pergunta_usuario: str, perguntas_respostas: dict, threshold_jaccard=0.15, threshold_levenshtein=10.0,
