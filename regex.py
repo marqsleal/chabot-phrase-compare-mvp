@@ -19,19 +19,19 @@ def is_stopword(stopwords_set=load_stopwords):
     return check_stopword
 
 def normalizar_texto(texto: str) -> str:
-    # 1. Converter para minúsculas
+    # Converter para minúsculas
     texto_norm = texto.lower()
 
-    # 2. Remover pontuação
+    # Remover pontuação
     texto_norm = re.sub(r'[^\w\s]', '', texto_norm)
 
-    # 3. Trocar dígitos por palavras
+    # Trocar dígitos por palavras
     texto_norm = re.sub(r'\d', digito_para_palavra, texto_norm)
 
-    # 4. Remove Stopwords
+    # Remove Stopwords
     texto_norm = re.sub(r'\bw+\b', is_stopword, texto_norm)
 
-    # 5. Remove Espaços Extras
+    # Remove Espaços Extras
     texto_norm = re.sub(r'\s+', ' ', texto_norm).strip()
 
     return texto_norm
