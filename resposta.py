@@ -31,7 +31,7 @@ def escolhe_resposta(pergunta_usuario: str, perguntas_respostas: dict, threshold
             melhor_similaridade = comparador
             melhor_pergunta = pergunta
 
-        if melhor_pergunta:
-            return perguntas_respostas[melhor_pergunta]
-        else:
-            return 'Desculpe, não entendi sua pergunta!'
+    if melhor_pergunta:
+        return perguntas_respostas[melhor_pergunta]
+    else:
+        return 'Desculpe, não entendi sua pergunta!'
