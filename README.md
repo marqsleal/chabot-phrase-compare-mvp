@@ -20,7 +20,7 @@ git clone https://github.com/marqsleal/chabot-phrase-compare-mvp.git
 2. Execute o arquivo `main.py`:
 
 ```bash
-python3 test.py
+python3 main.py
 ```
 
 ## `stopwords.txt`
